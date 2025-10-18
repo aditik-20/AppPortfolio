@@ -1,0 +1,440 @@
+/* General Reset */
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Times New Roman", Times, serif;
+  font-size: 12pt; /* consistent 12pt font size */
+}
+body {
+  scroll-behavior: smooth;
+  background: #0f0f0f;
+  color: white;
+}
+
+/* Navigation */
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: rgba(15, 15, 15, 0.9);
+  z-index: 100;
+  backdrop-filter: blur(10px);
+}
+nav ul {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+}
+nav ul li {
+  margin: 0 15px;
+}
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  padding: 15px;
+  display: block;
+  background: linear-gradient(90deg, #00ffff, #ff00ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: 0.3s;
+}
+nav ul li a:hover {
+  filter: brightness(1.5);
+}
+/* Hero Section */
+#hero {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #0f0f0f;
+  padding: 0 60px;
+}
+
+/* Hero Content Layout */
+.hero-content {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* center the content */
+  gap: 80px; /* space between text and pic */
+  width: 100%;
+  max-width: 1200px;
+}
+
+/* Left Side: Animated Name & Subtitle */
+.hero-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 15px;
+}
+
+.name {
+  font-size: 6rem;
+  font-weight: bold;
+  background: linear-gradient(90deg, #00ffff, #ff00ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  position: relative;
+  animation: none; /* remove glow animation */
+  text-shadow: none; /* remove any shadow sparkle */
+}
+
+.name::after {
+  content: "";
+  position: absolute;
+  width: 50%;
+  height: 4px;
+  background: linear-gradient(90deg, #00ffff, #ff00ff);
+  bottom: -10px;
+  left: 0;
+  border-radius: 2px;
+  animation: shine 2s infinite;
+}
+
+.subtitle {
+  font-size: 2.5rem;
+  color: #00ffff;
+  font-weight: 500;
+  background: linear-gradient(90deg, #00ffff, #ff00ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: slide-text 3s infinite alternate;
+}
+
+.description {
+  font-size: 2rem;
+  color: #00ffff;
+  font-family: Great Vibes, cursive;
+  max-width: 700px;
+  line-height: 1.5;
+}
+
+/* Right Side: Profile Pic with Sparkling Neon Frame */
+.hero-right {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 30px; /* moves picture slightly left */
+}
+
+.profile-pic {
+  width: 240px;
+  height: 320px;
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  animation: float 3s ease-in-out infinite;
+  box-shadow: 0 0 20px #00ffff, 0 0 50px #ff00ff;
+  z-index: 0; /* base layer */
+}
+
+.profile-pic img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 4px solid #0f0f0f; /* inner border */
+  background: #0f0f0f;
+  position: relative;
+  z-index: 1; /* bring image above the pseudo-element */
+}
+
+/* Sparkling neon border behind image */
+.profile-pic::before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  border-radius: 12px;
+  border: 4px solid transparent;
+  background: linear-gradient(45deg, #00ffff, #ff00ff, #ff00ff, #00ffff);
+  background-size: 400% 400%;
+  animation: sparkle 4s linear infinite, rotate 6s linear infinite;
+  pointer-events: none;
+  z-index: -1; /* move behind image */
+  opacity: 0.7; /* make it less overpowering */
+}
+
+/* Animations */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+@keyframes sparkle {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes glow-text {
+  0% {
+    text-shadow: 0 0 5px #00ffff, 0 0 10px #ff00ff;
+  }
+  100% {
+    text-shadow: 0 0 15px #00ffff, 0 0 25px #ff00ff;
+  }
+}
+
+@keyframes shine {
+  0% {
+    left: 0%;
+    width: 0%;
+  }
+  50% {
+    left: 25%;
+    width: 50%;
+  }
+  100% {
+    left: 100%;
+    width: 0%;
+  }
+}
+
+@keyframes slide-text {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(10px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .hero-content {
+    flex-direction: column-reverse;
+    gap: 30px;
+    text-align: center;
+  }
+  .hero-left h1 {
+    font-size: 3rem;
+  }
+  .subtitle {
+    font-size: 1.5rem;
+  }
+  .profile-pic {
+    width: 200px;
+    height: 260px;
+  }
+}
+
+/* About Me Section */
+#about {
+  padding: 100px 20px;
+  background: #0f0f0f; /* same as body */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.about-me-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 800px;
+  gap: 30px;
+  margin-top: 40px;
+}
+
+.about-me-container p {
+  font-size: 1.4rem;
+  line-height: 1.8;
+  color: #ccc;
+}
+
+.about-me-container .highlight {
+  background: linear-gradient(90deg, #00ffff, #ff00ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: bold;
+}
+
+/* Section Headings */
+section {
+  padding: 80px 20px;
+  min-height: 100vh;
+}
+section h2 {
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 30px;
+  background: linear-gradient(90deg, #00ffff, #ff00ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* About Me Cards */
+.about-cards {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+.about-card {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  padding: 20px;
+  width: 250px;
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.about-card:hover {
+  transform: translateY(-10px) scale(1.05);
+  box-shadow: 0 0 30px #ff00ff, 0 0 30px #00ffff;
+}
+.about-card img {
+  width: 100%;
+  border-radius: 15px;
+  margin-bottom: 15px;
+}
+
+/* Project Cards */
+.project-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+}
+.project-card {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 20px;
+  width: 280px;
+  border-radius: 20px;
+  text-align: center;
+  transition: 0.3s;
+}
+.project-card:hover {
+  transform: translateY(-10px) scale(1.05);
+  box-shadow: 0 0 30px #ff00ff, 0 0 30px #00ffff;
+}
+.project-card img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 15px;
+  margin-bottom: 15px;
+}
+.project-card a {
+  margin-top: 10px;
+  display: inline-block;
+  text-decoration: none;
+  color: black;
+  padding: 8px 15px;
+  border-radius: 10px;
+  background: linear-gradient(90deg, #00ffff, #ff00ff);
+  transition: 0.3s;
+}
+.project-card a:hover {
+  filter: brightness(1.5);
+}
+
+/* Generic Card Grid for Achievements, GitHub, Hackerrank */
+/* Certificate Cards Fix */
+.card-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  align-items: stretch; /* ensures equal height cards */
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  padding: 20px;
+  width: 280px;
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* keeps button at bottom */
+}
+.card img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 15px;
+  margin-bottom: 15px;
+}
+
+.card h3 {
+  font-size: 1.2rem;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.card p {
+  color: #ccc;
+  margin-top: auto;
+}
+
+.card a {
+  text-decoration: none;
+  color: black;
+  display: inline-block;
+  margin-top: 15px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  background: linear-gradient(90deg, #00ffff, #ff00ff);
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-10px) scale(1.05);
+  box-shadow: 0 0 30px #ff00ff, 0 0 30px #00ffff;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: "Times New Roman", Times, serif;
+  font-weight: bold;
+  color: white;
+}
+
+h1 {
+  font-size: 2.5rem;
+} /* Main name or big titles */
+h2 {
+  font-size: 2rem;
+} /* Section titles */
+h3 {
+  font-size: 1.4rem;
+} /* Card titles */
+p,
+a,
+li,
+span {
+  font-size: 12pt; /* Body text */
+}
